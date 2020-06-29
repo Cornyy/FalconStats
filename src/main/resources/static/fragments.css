@@ -1,0 +1,13 @@
+#bg-image {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background-image: url("BBallBG.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.6;
+}
+
+
+

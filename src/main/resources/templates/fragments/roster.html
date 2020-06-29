@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet"  href="fragments.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <title>Create roster</title>
+</head>
+<body>
+<div id="bg-image"></div>
+<div th:replace = "navigation.html">
+</div>
+
+<div class="card" style="float: left; width: 40%; margin-left: 7%; margin-top: 20px;">
+    <div class="card-body">
+        <h5 class="card-title" style="font-size: 40px;">Create new roster</h5>
+        <form th:object="${newRoster}" th:action="@{/addRoster}">
+       <b><label style="font-size: 25px" id="newRosterLabelName">Roster name : </label></b>
+        <input th:field="*{rosterName}" type="text" class="form-control" id="newRosterInputName" placeholder="Roster name">
+
+            <label style="margin-top: 30px" id="newRosterLabelPitcher">Pitcher</label>
+            <select th:field="*{pitcherName}" class="custom-select" id="newRosterSelectPitcher">
+                <option selected value="Null">Null</option>
+                <option th:each="players, rowStat: ${playersList}"
+                        th:value="${players.number + ' - ' + players.first_name + ' ' + players.last_name}"
+                        th:text=" ${players.number + ' - ' + players.first_name + ' ' + players.last_name}"/>
+            </select>
+            <label style="margin-top: 5px" id="newRosterLabelCatcher">Catcher</label>
+            <select th:field="*{catcherName}" class="custom-select" id="newRosterSelectCatcher">
+                <option selected value="Null">Null</option>
+                <option th:each="players, rowStat: ${playersList}"
+                        th:value="${players.number + ' - ' + players.first_name + ' ' + players.last_name}"
+                        th:text=" ${players.number + ' - ' + players.first_name + ' ' + players.last_name}"/>
+            </select>
+            <label style="margin-top: 5px" id="newRosterLabel1Base">1 Base</label>
+            <select th:field="*{firstBaseName}" class="custom-select" id="newRosterSelectFirstBase">
+                <option selected value="Null">Null</option>
+                <option th:each="players, rowStat: ${playersList}"
+                        th:value="${players.number + ' - ' + players.first_name + ' ' + players.last_name}"
+                        th:text=" ${players.number + ' - ' + players.first_name + ' ' + players.last_name}"/>
+            </select>
+            <label style="margin-top: 5px" id="newRosterLabel2Base">2 Base</label>
+            <select th:field="*{secondBaseName}" class="custom-select" id="newRosterSelectSecondBase">
+                <option selected value="Null">Null</option>
+                <option th:each="players, rowStat: ${playersList}"
+                        th:value="${players.number + ' - ' + players.first_name + ' ' + players.last_name}"
+                        th:text=" ${players.number + ' - ' + players.first_name + ' ' + players.last_name}"/>
+            </select>
+            <label style="margin-top: 5px" id="newRosterLabelShortstop">Shortstop</label>
+            <select th:field="*{shortstopName}" class="custom-select" id="newRosterSelectShortstop">
+                <option selected value="Null">Null</option>
+                <option th:each="players, rowStat: ${playersList}"
+                        th:value="${players.number + ' - ' + players.first_name + ' ' + players.last_name}"
+                        th:text=" ${players.number + ' - ' + players.first_name + ' ' + players.last_name}"/>
+            </select>
+            <label style="margin-top: 5px" id="newRosterLabel3Base">3 Base</label>
+            <select th:field="*{thirdBaseName}" class="custom-select" id="newRosterSelectThirdBase">
+                <option selected value="Null">Null</option>
+                <option th:each="players, rowStat: ${playersList}"
+                        th:value="${players.number + ' - ' + players.first_name + ' ' + players.last_name}"
+                        th:text=" ${players.number + ' - ' + players.first_name + ' ' + players.last_name}"/>
+            </select>
+            <label style="margin-top: 5px" id="newRosterLabelLeftField">Left field</label>
+            <select th:field="*{leftFieldName}" class="custom-select" id="newRosterSelectLeftField">
+                <option selected value="Null">Null</option>
+                <option th:each="players, rowStat: ${playersList}"
+                        th:value="${players.number + ' - ' + players.first_name + ' ' + players.last_name}"
+                        th:text=" ${players.number + ' - ' + players.first_name + ' ' + players.last_name}"/>
+            </select>
+            <label style="margin-top: 5px" id="newRosterLabelCenterField">Center field</label>
+            <select th:field="*{centerFieldName}" class="custom-select" id="newRosterSelectCenterField">
+                <option selected value="Null">Null</option>
+                <option th:each="players, rowStat: ${playersList}"
+                        th:value="${players.number + ' - ' + players.first_name + ' ' + players.last_name}"
+                        th:text=" ${players.number + ' - ' + players.first_name + ' ' + players.last_name}"/>
+            </select>
+            <label style="margin-top: 5px" id="newRosterLabelRightField">Right field</label>
+            <select th:field="*{rightFieldName}" class="custom-select" id="newRosterSelectRightField">
+                <option selected value="Null">Null</option>
+                <option th:each="players, rowStat: ${playersList}"
+                        th:value="${players.number + ' - ' + players.first_name + ' ' + players.last_name}"
+                        th:text=" ${players.number + ' - ' + players.first_name + ' ' + players.last_name}"/>
+            </select>
+            <button style="margin-top: 5px" id="loginBtn" type="Submit" class="btn btn-success btn-block">Save</button>
+        </form>
+    </div>
+</div>
+<div class="card" style="float: right; width: 40%; margin-right: 7%; margin-top: 20px;">
+    <div class="card-body">
+        <h5 class="card-title" style="font-size: 40px;">Saved rosters</h5>
+
+        <table class="table" id="table">
+            <thead>
+            <tr align="center">
+                <th>Roster name</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="rosters, rowStat: ${rosterList}"
+                th:style="${rowStat.odd} ? 'color: gray;'"
+                th:align="center">
+                <td th:text="${rosters.roster_name}"></td>
+                <td> <a class="btn btn-success" id="loadButton">Load</a>
+                    <a class="btn btn-danger" id="deleteButton">Delete</a></td>
+            </tr>
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

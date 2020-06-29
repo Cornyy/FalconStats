@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link rel="stylesheet"  href="/fragments.css">
+    <script type="text/javascript" src="/main.js"></script>
+
+    <title>players</title>
+</head>
+<body>
+<div th:replace = "navigation.html" :: navbar>
+</div>
+<div id="bg-image"></div>
+
+<div class="card" style="width: 80%; margin-left: 10%; margin-top: 20px;">
+    <div class="card-body">
+        <a  href="#" style=" margin-left: 85%; margin-bottom: 10px; width: 15%" class="btn btn-success" data-toggle="modal" data-target="#addNewPlayerModal">Add player</a>
+        <h5 class="card-title" style="font-size: 40px;">Players</h5>
+        <table class="table" id="table">
+            <thead>
+            <tr align="center">
+                <th>Number</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>First Position</th>
+                <th>Second position</th>
+                <th>Third position</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="players, rowStat: ${playersList}"
+                th:style="${rowStat.odd} ? 'color: gray;'"
+                th:align="center">
+                <td th:text="${players.number}"></td>
+                <td th:text="${players.first_name}"></td>
+                <td th:text="${players.last_name}"></td>
+                <td th:text="${players.first_position}"></td>
+                <td th:text="${players.second_position}"></td>
+                <td th:text="${players.Third_position}"></td>
+               <td> <a th:href="@{/getOnePlayer/(number=${players.number})}"  class="btn btn-info" id="editButton">Edit</a>
+                   <a th:href="@{/deletePlayer/(number=${players.number})}"  class="btn btn-danger" id="deleteButton">Delete</a></td>
+            </tr>
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+                                                    <!-- MODALS-->
+<!-- AddPlayerModal-->
+<div class="modal fade" id="addNewPlayerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="myModalLabel">Add new player</h3>
+            </div>
+            <div class="modal-body">
+                <form class="form-conatiner" th:action="@{/addNewPlayer}" th:object="${newPlayer}" method="post">
+                    <h5>Basic information</h5>
+                    <div class="form-group">
+                        <input style="margin-bottom: 5px" type="number" class="form-control" id="numberInput" placeholder="Number" th:field="*{number}">
+                        <input style="margin-bottom: 5px" type="text" class="form-control" id="firstNameInput" placeholder="First Name" th:field="*{firstName}">
+                        <input style="margin-bottom: 5px" type="text" class="form-control" id="lastNameInput" placeholder="Last Name" th:field="*{lastName}">
+                        <input style="margin-bottom: 5px" type="text" class="form-control" id="passwordInput" placeholder="Password" th:field="*{password}">
+                    </div>
+                    <h5>Positions</h5>
+                    <div class="form-group">
+                        <label id="firstPositionLabel" style="margin-bottom: 5px"> First Position </label>
+                        <select class="custom-select" id="firstPositionInputGroup" th:field="*{firstPosition}">
+                            <option selected value="Null">Null</option>
+                            <option value="P">P</option>
+                            <option value="C">C</option>
+                            <option value="1B">1B</option>
+                            <option value="2B">2B</option>
+                            <option value="3B">3B</option>
+                            <option value="SS">SS</option>
+                            <option value="LF">LF</option>
+                            <option value="CF">CF</option>
+                            <option value="RF">RF</option>
+                        </select>
+                        <label id="secondPositionLabel" style="margin-bottom: 5px"> Second Position </label>
+                        <select class="custom-select" id="secondPositionInputGroup" th:field="*{secondPosition}">
+                            <option selected value="Null">Null</option>
+                            <option value="P">P</option>
+                            <option value="C">C</option>
+                            <option value="1B">1B</option>
+                            <option value="2B">2B</option>
+                            <option value="3B">3B</option>
+                            <option value="SS">SS</option>
+                            <option value="LF">LF</option>
+                            <option value="CF">CF</option>
+                            <option value="RF">RF</option>
+                        </select>
+                        <label id="thirdPositionLabel" style="margin-bottom: 5px"> Third Position </label>
+                        <select class="custom-select" id="thirdPositionInputGroup" th:field="*{thirdPosition}">
+                            <option selected value="Null">Null</option>
+                            <option value="P">P</option>
+                            <option value="C">C</option>
+                            <option value="1B">1B</option>
+                            <option value="2B">2B</option>
+                            <option value="3B">3B</option>
+                            <option value="SS">SS</option>
+                            <option value="LF">LF</option>
+                            <option value="CF">CF</option>
+                            <option value="RF">RF</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button id="loginBtn" type="Submit" class="btn btn-success btn-block">Save changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- DeletePlayerModal-->
+<div class="modal fade" id="deletePlayerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="deletePlayerModalTitle">Delete player</h3>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                <a href="" type="button" id="deleteYes" class="btn btn-success">Yes</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- EditPlayerModal -->
+<div class="modal fade" id="editPlayerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="myeditModalLabel">Edit player</h3>
+            </div>
+            <div class="modal-body">
+                <form class="form-conatiner" th:action="@{/addNewPlayer}" th:object="${newPlayer}" method="post">
+                    <h5>Basic information</h5>
+                    <div class="form-group">
+                        <input style="margin-bottom: 5px" type="number" class="form-control" id="numberEditInput" placeholder="Number" th:field="*{number}">
+                        <input style="margin-bottom: 5px" type="text" class="form-control" id="firstNameEditInput" placeholder="First Name" th:field="*{firstName}">
+                        <input style="margin-bottom: 5px" type="text" class="form-control" id="lastNameEditInput" placeholder="Last Name" th:field="*{lastName}">
+                        <input style="margin-bottom: 5px" type="text" class="form-control" id="passwordEditInput" placeholder="Password" th:field="*{password}">
+                    </div>
+                    <h5>Positions</h5>
+                    <div class="form-group">
+                        <label id="firstPositionEditLabel" style="margin-bottom: 5px"> First Position </label>
+                        <select class="custom-select" id="firstPositionEditInputGroup" th:field="*{firstPosition}">
+                            <option selected value="Null">Null</option>
+                            <option value="P">P</option>
+                            <option value="C">C</option>
+                            <option value="1B">1B</option>
+                            <option value="2B">2B</option>
+                            <option value="3B">3B</option>
+                            <option value="SS">SS</option>
+                            <option value="LF">LF</option>
+                            <option value="CF">CF</option>
+                            <option value="RF">RF</option>
+                        </select>
+                        <label id="secondPositionEditLabel" style="margin-bottom: 5px"> Second Position </label>
+                        <select class="custom-select" id="secondPositionEditInputGroup" th:field="*{secondPosition}">
+                            <option selected value="Null">Null</option>
+                            <option value="P">P</option>
+                            <option value="C">C</option>
+                            <option value="1B">1B</option>
+                            <option value="2B">2B</option>
+                            <option value="3B">3B</option>
+                            <option value="SS">SS</option>
+                            <option value="LF">LF</option>
+                            <option value="CF">CF</option>
+                            <option value="RF">RF</option>
+                        </select>
+                        <label id="thirdPositionEditLabel" style="margin-bottom: 5px"> Third Position </label>
+                        <select class="custom-select" id="thirdPositionEditInputGroup" th:field="*{thirdPosition}">
+                            <option selected value="Null">Null</option>
+                            <option value="P">P</option>
+                            <option value="C">C</option>
+                            <option value="1B">1B</option>
+                            <option value="2B">2B</option>
+                            <option value="3B">3B</option>
+                            <option value="SS">SS</option>
+                            <option value="LF">LF</option>
+                            <option value="CF">CF</option>
+                            <option value="RF">RF</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button id="EditPlayerButton" type="Submit" class="btn btn-success btn-block">Save changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
