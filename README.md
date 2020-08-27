@@ -1,4 +1,6 @@
-# FalconStats
+# FalconStats (WORK IN PROGRESS)
+
+
 
 A system created for a bachelor's thesis. Used to display statistics for baseball team players.
 
